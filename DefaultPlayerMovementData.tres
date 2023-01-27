@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dsmsbmhp6dgdq"]
+
+[ext_resource type="Script" path="res://PlayerMovementData.gd" id="1_pqc4w"]
+
+[resource]
+script = ExtResource("1_pqc4w")
+gravity = 5
+speed = 75
+jump_speed = 160
+jump_maxcount = 1
+jump_count = 0
+fric = 15.0
+acc = 15.0
+jump_minspeed = -70
+fall = 2
+double_jumprate = 0.7
+climb_speed = 50

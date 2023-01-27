@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkxrlu5iacl78"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_jopu5"]
+[ext_resource type="PackedScene" uid="uid://cgcnpq22vq38c" path="res://Objects/tile_map.tscn" id="2_3m2go"]
+[ext_resource type="PackedScene" uid="uid://b1onmwn6vqmfq" path="res://player.tscn" id="2_6m4f7"]
+[ext_resource type="PackedScene" uid="uid://b3qowjld41eum" path="res://Objects/spikes.tscn" id="3_m2vom"]
+[ext_resource type="PackedScene" uid="uid://0toyyvyrjdra" path="res://walking_enemy.tscn" id="5_31rnw"]
+[ext_resource type="PackedScene" uid="uid://c6nhaanq3l6l3" path="res://Objects/block.tscn" id="6_jamto"]
+[ext_resource type="PackedScene" uid="uid://dmxmx1kqq0tf" path="res://Objects/ladder.tscn" id="7_7n4wh"]
+
+[node name="World" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_jopu5")
+
+[node name="TileMap" parent="." instance=ExtResource("2_3m2go")]
+layer_0/tile_data = PackedInt32Array(589841, 131072, 7, 524305, 131072, 6, 589840, 131072, 7, 524304, 131072, 6, 589839, 131072, 7, 524303, 131072, 6, 589838, 131072, 7, 524302, 131072, 6, 589837, 131072, 7, 524301, 131072, 6, 589836, 131072, 7, 524300, 131072, 6, 589835, 131072, 7, 524299, 131072, 6, 589834, 131072, 7, 524298, 327680, 1, 589833, 131072, 7, 524297, 131072, 1, 589832, 131072, 7, 524296, 131072, 1, 589831, 131072, 7, 524295, 131072, 1, 589830, 131072, 7, 524294, 262144, 1, 589829, 131072, 7, 524293, 131072, 6, 589828, 131072, 7, 524292, 131072, 6, 589827, 131072, 7, 524291, 131072, 6, 589826, 131072, 7, 524290, 131072, 6, 589825, 131072, 7, 524289, 131072, 6, 589824, 65536, 7, 524288, 65536, 6, 458758, 196608, 1, 458757, 131072, 1, 458756, 131072, 1, 458755, 131072, 1, 458754, 131072, 1, 458752, 65536, 6, 458769, 131072, 1, 458768, 131072, 1, 458767, 131072, 1, 458766, 262144, 1, 458765, 131072, 6, 458764, 131072, 6, 458763, 131072, 6, 458762, 65536, 6, 393216, 0, 6, 327680, 0, 6, 262144, 0, 6, 196608, 0, 6, 131072, 0, 6, 65536, 0, 1, 458753, 131072, 1, 589847, 131072, 7, 524311, 131072, 6, 458775, 131072, 6, 589846, 131072, 7, 524310, 131072, 6, 458774, 131072, 6, 589845, 131072, 7, 524309, 131072, 6, 458773, 327680, 1, 589844, 131072, 7, 524308, 131072, 6, 458772, 131072, 1, 589843, 131072, 7, 524307, 131072, 6, 458771, 131072, 1, 589842, 131072, 7, 524306, 131072, 6, 458770, 131072, 1, 589855, 196608, 7, 524319, 196608, 6, 458783, 196608, 6, 589854, 131072, 7, 524318, 131072, 6, 458782, 131072, 6, 589853, 131072, 7, 524317, 131072, 6, 458781, 131072, 6, 589852, 131072, 7, 524316, 131072, 6, 458780, 131072, 6, 589851, 131072, 7, 524315, 131072, 6, 458779, 131072, 6, 589850, 131072, 7, 524314, 131072, 6, 458778, 131072, 6, 589849, 131072, 7, 524313, 131072, 6, 458777, 131072, 6, 589848, 131072, 7, 524312, 131072, 6, 458776, 131072, 6, 393230, 196608, 1, 393229, 131072, 1, 393228, 131072, 1, 393227, 131072, 1, 393226, 65536, 1, 393247, 196608, 1, 393246, 131072, 1, 393245, 131072, 1, 393244, 131072, 1, 393243, 131072, 1, 393242, 131072, 1, 393241, 131072, 1, 393240, 131072, 1, 393239, 131072, 1, 393238, 131072, 1, 393237, 65536, 1, 196615, 458752, 2, 131079, 458752, 2, 65543, 458752, 2, 196616, 458752, 2, 131080, 458752, 2, 65544, 458752, 2, 262151, 262144, 2, 262152, 262144, 2)
+
+[node name="Player" parent="." instance=ExtResource("2_6m4f7")]
+z_index = 10
+position = Vector2(58, 115)
+
+[node name="WalkingEnemy" parent="." instance=ExtResource("5_31rnw")]
+position = Vector2(225, 108)
+
+[node name="WalkingEnemy2" parent="." instance=ExtResource("5_31rnw")]
+position = Vector2(321, 126)
+
+[node name="Traps" type="Node2D" parent="."]
+
+[node name="Spikes" type="Node2D" parent="Traps"]
+
+[node name="Spikes" parent="Traps/Spikes" instance=ExtResource("3_m2vom")]
+position = Vector2(135, 144)
+
+[node name="Spikes2" parent="Traps/Spikes" instance=ExtResource("3_m2vom")]
+position = Vector2(153, 144)
+
+[node name="Spikes3" parent="Traps/Spikes" instance=ExtResource("3_m2vom")]
+position = Vector2(171, 144)
+
+[node name="Blocks" type="Node2D" parent="Traps"]
+
+[node name="Block" parent="Traps/Blocks" instance=ExtResource("6_jamto")]
+position = Vector2(135, 96)
+
+[node name="Block2" parent="Traps/Blocks" instance=ExtResource("6_jamto")]
+position = Vector2(153, 96)
+
+[node name="Ladders" type="Node2D" parent="."]
+
+[node name="Ladder" parent="Ladders" instance=ExtResource("7_7n4wh")]
+position = Vector2(90, 108)
+
+[node name="Ladder2" parent="Ladders" instance=ExtResource("7_7n4wh")]
+position = Vector2(90, 90)
+
+[node name="Ladder3" parent="Ladders" instance=ExtResource("7_7n4wh")]
+position = Vector2(90, 72)
+
+[node name="Ladder4" parent="Ladders" instance=ExtResource("7_7n4wh")]
+position = Vector2(90, 54)
+
+[node name="Ladder5" parent="Ladders" instance=ExtResource("7_7n4wh")]
+position = Vector2(90, 36)

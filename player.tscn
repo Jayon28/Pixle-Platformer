@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1onmwn6vqmfq"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_s3nqc"]
+[ext_resource type="SpriteFrames" uid="uid://b3tr3dfv5tkjd" path="res://skins/PlayerBlue.tres" id="2_mdlkv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmuu3"]
+size = Vector2(16, 17)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_s3nqc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+frames = ExtResource("2_mdlkv")
+animation = &"Jump"
+playing = true
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_mmuu3")
+metadata/_edit_group_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+current = true
+limit_left = 0
+limit_bottom = 170
+
+[node name="LadderCheck" type="RayCast2D" parent="."]
+position = Vector2(0, -5)
+target_position = Vector2(0, 16)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
+[connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
