@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx7a7q2iiaa3f"]
+
+[ext_resource type="PackedScene" uid="uid://chs4fysuw4wdu" path="res://Characters/player.tscn" id="1_6w3cd"]
+[ext_resource type="PackedScene" uid="uid://b3qowjld41eum" path="res://Objects/spikes.tscn" id="2_i07va"]
+[ext_resource type="PackedScene" uid="uid://cxf3gqxqx14h4" path="res://Objects/check_point.tscn" id="3_aufg1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kt3ra"]
+size = Vector2(473, 27.5)
+
+[node name="TestScene" type="Node2D"]
+texture_filter = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(240.5, 238.25)
+shape = SubResource("RectangleShape2D_kt3ra")
+
+[node name="Player" parent="." instance=ExtResource("1_6w3cd")]
+position = Vector2(45, 207)
+
+[node name="Spikes" parent="." instance=ExtResource("2_i07va")]
+position = Vector2(99, 225)
+
+[node name="CheckPoint" parent="." instance=ExtResource("3_aufg1")]
+position = Vector2(162, 225)

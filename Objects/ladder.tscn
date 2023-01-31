@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c4qpbxfnicfsu" path="res://Assets/tiles_packed.png" id="2_373q5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tulq1"]
-size = Vector2(12, 18)
+size = Vector2(16, 21)
 
 [node name="Ladder" type="Area2D"]
 texture_filter = 1
@@ -19,5 +19,5 @@ region_rect = Rect2(198, 54, 18, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1
-position = Vector2(9, 9)
+position = Vector2(9, 7.5)
 shape = SubResource("RectangleShape2D_tulq1")

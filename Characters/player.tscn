@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://chs4fysuw4wdu"]
+
+[ext_resource type="Script" path="res://Characters/player.gd" id="1_7wvbk"]
+[ext_resource type="SpriteFrames" uid="uid://b3tr3dfv5tkjd" path="res://skins/PlayerBlue.tres" id="2_b508x"]
+[ext_resource type="FontFile" uid="uid://cvc0ojxiyrcq" path="res://Assets/ipix_12px.ttf" id="3_tg0tw"]
+[ext_resource type="Script" path="res://Characters/Label.gd" id="4_eaymq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mhsd"]
+size = Vector2(12, 17)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_7wvbk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -11)
+frames = ExtResource("2_b508x")
+animation = &"Jump"
+playing = true
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_4mhsd")
+metadata/_edit_group_ = true
+
+[node name="LadderCheck" type="RayCast2D" parent="."]
+position = Vector2(0, -16)
+target_position = Vector2(0, 16)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+position = Vector2(0, -11)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 479.0
+offset_bottom = 160.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.690196, 0.152941, 0.152941, 1)
+theme_override_fonts/font = ExtResource("3_tg0tw")
+horizontal_alignment = 1
+autowrap_mode = 1
+script = ExtResource("4_eaymq")
+
+[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
+[connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]

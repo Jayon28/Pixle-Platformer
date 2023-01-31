@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwnrpsvvpv8b"]
+
+[ext_resource type="Script" path="res://Assets/sfx/sound_player.gd" id="1_dy803"]
+[ext_resource type="AudioStream" uid="uid://bdcckrrbxvc5x" path="res://Assets/sfx/Bleeding.wav" id="2_2mqep"]
+[ext_resource type="AudioStream" uid="uid://drj0g2s4mwiyn" path="res://Assets/sfx/jump.wav" id="3_otl02"]
+
+[node name="SoundPlayer" type="Node"]
+script = ExtResource("1_dy803")
+
+[node name="AudioPlayers" type="Node" parent="."]
+
+[node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource("2_2mqep")
+volume_db = 9.454
+bus = &"Sound"
+
+[node name="AudioStreamPlayerJump" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource("3_otl02")
+bus = &"Sound"

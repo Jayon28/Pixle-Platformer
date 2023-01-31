@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://gbjvxadlretu"]
+
+[ext_resource type="Script" path="res://Characters/stomp_enemy.gd" id="1_j5j1t"]
+[ext_resource type="Texture2D" uid="uid://dxlyyv301nthw" path="res://Assets/characters_packed.png" id="1_rly8u"]
+[ext_resource type="PackedScene" uid="uid://dohiloevp81hw" path="res://Objects/hit_box.tscn" id="2_huofk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajabf"]
+atlas = ExtResource("1_rly8u")
+region = Rect2(120, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvcu1"]
+atlas = ExtResource("1_rly8u")
+region = Rect2(96, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1mf1j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajabf")
+}],
+"loop": true,
+"name": &"Falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvcu1")
+}],
+"loop": true,
+"name": &"Rising",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijgvs"]
+size = Vector2(16, 16)
+
+[node name="StompEnemy" type="Node2D"]
+z_index = 11
+z_as_relative = false
+script = ExtResource("1_j5j1t")
+fall_speed = 3
+rise_speed = 30
+land_delay = 1.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -9)
+frames = SubResource("SpriteFrames_1mf1j")
+animation = &"Rising"
+
+[node name="HitBox" parent="." instance=ExtResource("2_huofk")]
+position = Vector2(0, -9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_ijgvs")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -9)
+target_position = Vector2(0, 9)

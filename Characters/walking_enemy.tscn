@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://chyd8ebemcutx"]
+
+[ext_resource type="Texture2D" uid="uid://dxlyyv301nthw" path="res://Assets/characters_packed.png" id="2_amt8c"]
+[ext_resource type="PackedScene" uid="uid://dohiloevp81hw" path="res://Objects/hit_box.tscn" id="3_a1hlu"]
+
+[sub_resource type="GDScript" id="GDScript_420p4"]
+script/source = "extends CharacterBody2D
+
+var direction = Vector2.RIGHT
+var freezed = false
+@onready var edgeCheckR = $EdgeCheckR
+@onready var edgeCheckL = $EdgeCheckL
+
+func _ready():
+	add_to_group(\"Charators\")
+
+func _physics_process(delta):
+	if freezed: return
+	var found_wall = is_on_wall()
+	var found_edge = !edgeCheckR.is_colliding() || !edgeCheckL.is_colliding()
+	if found_wall || found_edge:
+		direction *= -1
+		scale.x *= -1
+	velocity = direction * 25
+	move_and_slide()
+
+func get_freezed():
+	freezed = true
+
+func unfreezed():
+	freezed = false
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsi78"]
+atlas = ExtResource("2_amt8c")
+region = Rect2(144, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v40ps"]
+atlas = ExtResource("2_amt8c")
+region = Rect2(168, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_swyr5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsi78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v40ps")
+}],
+"loop": true,
+"name": &"Walking",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emo3f"]
+size = Vector2(10, 9)
+
+[node name="WalkingEnemy" type="CharacterBody2D"]
+texture_filter = 1
+scale = Vector2(-1, 1)
+collision_layer = 2
+script = SubResource("GDScript_420p4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+frames = SubResource("SpriteFrames_swyr5")
+animation = &"Walking"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -5)
+shape = SubResource("RectangleShape2D_emo3f")
+
+[node name="EdgeCheckR" type="RayCast2D" parent="."]
+position = Vector2(5, -1)
+target_position = Vector2(0, 5)
+
+[node name="EdgeCheckL" type="RayCast2D" parent="."]
+position = Vector2(-6, -1)
+target_position = Vector2(0, 5)
+
+[node name="HitBox" parent="." instance=ExtResource("3_a1hlu")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitBox"]
+polygon = PackedVector2Array(7, -1, 7, -10, 1, -12, 1, -14, 0, -16, -1, -16, -2, -14, -2, -12, -7, -10, -7, -1)

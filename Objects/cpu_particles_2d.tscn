@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://e0x6nl0sfpnn"]
+
+[node name="Blood" type="CPUParticles2D"]
+modulate = Color(0.921569, 0.0627451, 0.0784314, 1)
+amount = 60
+lifetime = 0.25
+randomness = 0.54
+lifetime_randomness = 0.65
+local_coords = true
+spread = 32.02
+initial_velocity_min = 24.34
+initial_velocity_max = 221.63
+angle_max = 45.0
+scale_amount_max = 1.3
+color = Color(1, 0.0313726, 0.12549, 1)
